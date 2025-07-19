@@ -9,3 +9,8 @@
 ## 1.1.1
 
 - Readme file updated
+
+
+## 1.1.2
+
+- ios method channel

@@ -38,7 +38,6 @@ class PDFDocument {
       });
       document.count = document.count = int.parse(pageCount);
     } catch (e) {
-      print(e);
       throw Exception('Error reading PDF! ${e.toString()}');
     }
     return document;
@@ -160,7 +159,6 @@ class PDFDocument {
         'filePath': file.path,
         'clearCacheDir': clearPreviewCache,
       });
-      print('var pageCount: $pageCount');
       document.count = document.count = int.parse(pageCount);
     } catch (e) {
       throw Exception('Error reading PDF! ${e.toString()}');
