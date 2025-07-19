@@ -1,6 +1,6 @@
 name: jv_easy_pdf_viewer
 description: "A new Flutter plugin project for pdf."
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/jitendravaishnavs/jv_pdf_viewer
 
 environment:

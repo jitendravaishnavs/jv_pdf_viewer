@@ -1,0 +1,7 @@
+funding:
+  github: jitendravaishnavs
+  custom:
+    - type: "PayPal"
+      url: "https://paypal.me/JeetVaishnavNadol"
+      description: "Support the development of this project via PayPal"
+  funding_yml: true
