@@ -18,9 +18,10 @@ class PDFPage extends StatefulWidget {
   final double minScale;
   final double maxScale;
   final double panLimit;
-  PDFPage(
+  const PDFPage(
     this.imgPath,
     this.num, {
+    super.key,
     this.onZoomChanged,
     this.zoomSteps = 3,
     this.minScale = 1.0,
@@ -29,7 +30,7 @@ class PDFPage extends StatefulWidget {
   });
 
   @override
-  _PDFPageState createState() => _PDFPageState();
+  State<PDFPage> createState() => _PDFPageState();
 }
 
 class _PDFPageState extends State<PDFPage> {

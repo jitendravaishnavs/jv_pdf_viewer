@@ -5,7 +5,7 @@ import 'package:jv_easy_pdf_viewer/jv_easy_pdf_viewer.dart';
 void main() => runApp(App());
 
 class App extends StatelessWidget {
-  const App({Key? key}) : super(key: key);
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class App extends StatelessWidget {
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({this.progressExample = false});
+  const MyApp({super.key, this.progressExample = false});
 
   final bool progressExample;
 

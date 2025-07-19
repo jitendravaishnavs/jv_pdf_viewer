@@ -1,4 +1,4 @@
-library jv_easy_pdf_viewer;
+library;
 
 export 'src/document.dart' show PDFDocument;
 export 'src/page.dart' show PDFPage;

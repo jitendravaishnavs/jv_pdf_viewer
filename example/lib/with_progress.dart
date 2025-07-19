@@ -2,7 +2,7 @@ import 'package:jv_easy_pdf_viewer/jv_easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 
 class WithProgress extends StatefulWidget {
-  WithProgress({Key? key}) : super(key: key);
+  const WithProgress({super.key});
 
   @override
   State<WithProgress> createState() => _WithProgressState();

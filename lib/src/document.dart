@@ -7,13 +7,11 @@ import 'package:jv_easy_pdf_viewer/src/page.dart';
 import 'package:path_provider/path_provider.dart';
 
 class PDFDocument {
-  static const MethodChannel _channel = const MethodChannel(
-    'easy_pdf_viewer_plugin',
-  );
+  static const MethodChannel _channel = MethodChannel('easy_pdf_viewer_plugin');
 
   String? _filePath;
   late int count;
-  List<PDFPage> _pages = [];
+  final List<PDFPage> _pages = [];
   bool _preloaded = false;
 
   /// expose file path for pdf sharing capabilities
@@ -194,7 +192,7 @@ class PDFDocument {
       'filePath': _filePath,
       'pageNumber': page,
     });
-    return new PDFPage(
+    return PDFPage(
       data,
       page,
       onZoomChanged: onZoomChanged,
@@ -237,12 +235,11 @@ class PDFDocument {
   // Stream all pages
   Stream<PDFPage?> getAll({final Function(double)? onZoomChanged}) {
     return Future.forEach<PDFPage?>(List.filled(count, null), (i) async {
-          print(i);
           final data = await _channel.invokeMethod('getPage', {
             'filePath': _filePath,
             'pageNumber': i,
           });
-          return new PDFPage(data, 1, onZoomChanged: onZoomChanged);
+          return PDFPage(data, 1, onZoomChanged: onZoomChanged);
         }).asStream()
         as Stream<PDFPage?>;
   }

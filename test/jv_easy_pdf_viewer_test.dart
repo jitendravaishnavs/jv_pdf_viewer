@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:jv_easy_pdf_viewer/jv_easy_pdf_viewer.dart';
 import 'package:jv_easy_pdf_viewer/jv_easy_pdf_viewer_platform_interface.dart';
 import 'package:jv_easy_pdf_viewer/jv_easy_pdf_viewer_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -20,10 +19,9 @@ void main() {
   });
 
   test('getPlatformVersion', () async {
-    JvEasyPdfViewer jvEasyPdfViewerPlugin = JvEasyPdfViewer();
     MockJvEasyPdfViewerPlatform fakePlatform = MockJvEasyPdfViewerPlatform();
     JvEasyPdfViewerPlatform.instance = fakePlatform;
 
-    expect(await jvEasyPdfViewerPlugin.getPlatformVersion(), '42');
+    expect(await JvEasyPdfViewerPlatform.instance.getPlatformVersion(), '42');
   });
 }
