@@ -5,3 +5,7 @@
 ## 1.1.0
 
 - Ios compatibility 
+
+## 1.1.1
+
+- Readme file updated
