@@ -34,7 +34,6 @@ class _MyAppState extends State<MyApp> {
 
   loadDocument() async {
     document = await PDFDocument.fromAsset('assets/sample.pdf');
-
     setState(() => _isLoading = false);
   }
 
