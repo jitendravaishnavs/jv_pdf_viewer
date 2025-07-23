@@ -19,3 +19,8 @@
 ## 1.2.1
 
 - Ios pdf loading issue 
+
+
+## 1.2.2
+
+- Viewer page loading issue resolved
