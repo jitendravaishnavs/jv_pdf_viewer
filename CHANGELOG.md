@@ -14,3 +14,8 @@
 ## 1.1.2
 
 - ios method channel
+
+
+## 1.2.1
+
+- Ios pdf loading issue 

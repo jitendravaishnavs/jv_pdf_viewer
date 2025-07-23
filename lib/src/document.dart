@@ -11,7 +11,7 @@ class PDFDocument {
 
   String? _filePath;
   late int count;
-  final List<PDFPage> _pages = [];
+  final List<PDFPage> _pages = <PDFPage>[];
   bool _preloaded = false;
 
   /// expose file path for pdf sharing capabilities
@@ -32,10 +32,13 @@ class PDFDocument {
     PDFDocument document = PDFDocument();
     document._filePath = file.path;
     try {
-      var pageCount = await _channel.invokeMethod('getNumberOfPages', {
-        'filePath': file.path,
-        'clearCacheDir': clearPreviewCache,
-      });
+      dynamic pageCount = await _channel.invokeMethod(
+        'getNumberOfPages',
+        <String, Object>{
+          'filePath': file.path,
+          'clearCacheDir': clearPreviewCache,
+        },
+      );
       document.count = document.count = int.parse(pageCount);
     } catch (e) {
       throw Exception('Error reading PDF! ${e.toString()}');
@@ -59,7 +62,7 @@ class PDFDocument {
     String url, {
     Map<String, String>? headers,
     CacheManager? cacheManager,
-    clearPreviewCache = true,
+    bool clearPreviewCache = true,
   }) async {
     // Download into cache
     File f = await (cacheManager ?? DefaultCacheManager()).getSingleFile(
@@ -69,10 +72,13 @@ class PDFDocument {
     PDFDocument document = PDFDocument();
     document._filePath = f.path;
     try {
-      var pageCount = await _channel.invokeMethod('getNumberOfPages', {
-        'filePath': f.path,
-        'clearCacheDir': clearPreviewCache,
-      });
+      dynamic pageCount = await _channel.invokeMethod(
+        'getNumberOfPages',
+        <String, dynamic>{
+          'filePath': f.path,
+          'clearCacheDir': clearPreviewCache,
+        },
+      );
       document.count = document.count = int.parse(pageCount);
     } catch (e) {
       throw Exception('Error reading PDF! ${e.toString()}');
@@ -105,20 +111,21 @@ class PDFDocument {
     required void Function(PDFDocument document) onDownloadComplete,
   }) {
     StreamSubscription<FileResponse>? streamSubscription;
-    final fileResponse = (cacheManager ?? DefaultCacheManager()).getFileStream(
-      url,
-      headers: headers,
-      withProgress: true,
-    );
+    final Stream<FileResponse> fileResponse =
+        (cacheManager ?? DefaultCacheManager()).getFileStream(
+          url,
+          headers: headers,
+          withProgress: true,
+        );
 
-    streamSubscription = fileResponse.listen((event) async {
+    streamSubscription = fileResponse.listen((FileResponse event) async {
       if (event is DownloadProgress) {
         downloadProgress.call(event);
         return;
       }
 
       if (event is FileInfo) {
-        final pdfDocument = await fromFile(
+        final PDFDocument pdfDocument = await fromFile(
           event.file,
           clearPreviewCache: clearPreviewCache,
         );
@@ -139,15 +146,15 @@ class PDFDocument {
   /// by calling [PDFDocument.clearPreviewCache].
   static Future<PDFDocument> fromAsset(
     String asset, {
-    clearPreviewCache = true,
+    bool clearPreviewCache = true,
   }) async {
     // To open from assets, you can copy them to the app storage folder, and the access them "locally"
     File file;
     try {
-      var dir = await getApplicationDocumentsDirectory();
+      Directory dir = await getApplicationDocumentsDirectory();
       file = File("${dir.path}/file.pdf");
-      var data = await rootBundle.load(asset);
-      var bytes = data.buffer.asUint8List();
+      ByteData data = await rootBundle.load(asset);
+      Uint8List bytes = data.buffer.asUint8List();
       await file.writeAsBytes(bytes, flush: true);
     } catch (e) {
       throw Exception('Error parsing asset file!');
@@ -155,10 +162,13 @@ class PDFDocument {
     PDFDocument document = PDFDocument();
     document._filePath = file.path;
     try {
-      var pageCount = await _channel.invokeMethod('getNumberOfPages', {
-        'filePath': file.path,
-        'clearCacheDir': clearPreviewCache,
-      });
+      var pageCount = await _channel.invokeMethod(
+        'getNumberOfPages',
+        <String, dynamic>{
+          'filePath': file.path,
+          'clearCacheDir': clearPreviewCache,
+        },
+      );
       document.count = document.count = int.parse(pageCount);
     } catch (e) {
       throw Exception('Error reading PDF! ${e.toString()}');
@@ -188,7 +198,7 @@ class PDFDocument {
   }) async {
     assert(page > 0);
     if (_preloaded && _pages.isNotEmpty) return _pages[page - 1];
-    var data = await _channel.invokeMethod('getPage', {
+    var data = await _channel.invokeMethod('getPage', <String, Object?>{
       'filePath': _filePath,
       'pageNumber': page,
     });
@@ -211,8 +221,8 @@ class PDFDocument {
     final double? panLimit,
   }) async {
     int countvar = 1;
-    for (final _ in List.filled(count, null)) {
-      final data = await _channel.invokeMethod('getPage', {
+    for (final Null _ in List.filled(count, null)) {
+      final data = await _channel.invokeMethod('getPage', <String, Object?>{
         'filePath': _filePath,
         'pageNumber': countvar,
       });
@@ -234,11 +244,13 @@ class PDFDocument {
 
   // Stream all pages
   Stream<PDFPage?> getAll({final Function(double)? onZoomChanged}) {
-    return Future.forEach<PDFPage?>(List.filled(count, null), (i) async {
-          final data = await _channel.invokeMethod('getPage', {
-            'filePath': _filePath,
-            'pageNumber': i,
-          });
+    return Future.forEach<PDFPage?>(List<PDFPage?>.filled(count, null), (
+          PDFPage? i,
+        ) async {
+          final dynamic data = await _channel.invokeMethod(
+            'getPage',
+            <String, Object?>{'filePath': _filePath, 'pageNumber': i},
+          );
           return PDFPage(data, 1, onZoomChanged: onZoomChanged);
         }).asStream()
         as Stream<PDFPage?>;

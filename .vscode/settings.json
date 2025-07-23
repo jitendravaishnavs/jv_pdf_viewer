@@ -1,14 +1,5 @@
 {
-    "cSpell.words": [
-        "ashbourne",
-        "codo",
-        "Diss",
-        "firstname",
-        "lastname",
-        "nylo",
-        "textstyles",
-        "userreferralid"
-    ],
+    
     // Enables formatting on save
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "Dart-Code.dart-code",
@@ -17,5 +8,12 @@
         "editor.codeActionsOnSave": {
             "source.fixAll": "explicit"
         }
+    },
+    "[yaml]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "initializer_list": "cpp"
     }
 }

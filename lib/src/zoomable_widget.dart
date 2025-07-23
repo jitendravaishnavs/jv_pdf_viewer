@@ -354,7 +354,7 @@ class _ZoomableChildState extends AnimatedWidgetBaseState<_ZoomableChild> {
   DoubleTween? _rotation;
 
   @override
-  void forEachTween(visitor) {
+  void forEachTween(dynamic visitor) {
     _zoom =
         visitor(
               _zoom,

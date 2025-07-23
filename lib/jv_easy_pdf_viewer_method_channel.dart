@@ -7,11 +7,11 @@ import 'jv_easy_pdf_viewer_platform_interface.dart';
 class MethodChannelJvEasyPdfViewer extends JvEasyPdfViewerPlatform {
   /// The method channel used to interact with the native platform.
   @visibleForTesting
-  final methodChannel = const MethodChannel('jv_easy_pdf_viewer');
+  final MethodChannel methodChannel = const MethodChannel('jv_easy_pdf_viewer');
 
   @override
   Future<String?> getPlatformVersion() async {
-    final version = await methodChannel.invokeMethod<String>(
+    final String? version = await methodChannel.invokeMethod<String>(
       'getPlatformVersion',
     );
     return version;

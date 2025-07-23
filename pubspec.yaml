@@ -1,7 +1,7 @@
 name: jv_easy_pdf_viewer
 description: A Flutter plugin that provides a simple and customizable PDF viewer for Android and iOS.
-version: 1.1.2
-homepage: https://github.com/jitendravaishnavs/jv_pdf_viewer
+version: 1.2.1
+homepage: https://github.com/jitendravaishnavs/jv_easy_pdf_viewer
 repository: https://github.com/jitendravaishnavs/jv_easy_pdf_viewer
 issue_tracker: https://github.com/jitendravaishnavs/jv_easy_pdf_viewer/issues
 
@@ -43,7 +43,7 @@ flutter:
         package: com.example.jv_easy_pdf_viewer
         pluginClass: JvEasyPdfViewerPlugin
       ios:
-        pluginClass: JvEasyPdfViewerPlugin
+        pluginClass: EasyPdfViewerPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:

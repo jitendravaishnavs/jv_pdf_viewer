@@ -1,10 +1,10 @@
 import Flutter
 import UIKit
 
-public class JvEasyPdfViewerPlugin: NSObject, FlutterPlugin {
+public class SwiftEasyPdfViewerPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
-    let channel = FlutterMethodChannel(name: "easy_pdf_viewer_plugin", binaryMessenger: registrar.messenger())
-    let instance = JvEasyPdfViewerPlugin()
+    let channel = FlutterMethodChannel(name: "easy_pdf_viewer", binaryMessenger: registrar.messenger())
+    let instance = SwiftEasyPdfViewerPlugin()
     registrar.addMethodCallDelegate(instance, channel: channel)
   }
 

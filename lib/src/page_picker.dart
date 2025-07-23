@@ -36,9 +36,9 @@ class _PagePickerState extends State<PagePicker> {
         minValue: 1,
         maxValue: widget.maxValue!,
         value: _currentValue!,
-        onChanged: (value) => setState(() => _currentValue = value),
+        onChanged: (int value) => setState(() => _currentValue = value),
       ),
-      actions: [
+      actions: <Widget>[
         TextButton(
           child: widget.numberPickerConfirmWidget ?? const Text('OK'),
           onPressed: () => Navigator.of(context).pop(_currentValue),
