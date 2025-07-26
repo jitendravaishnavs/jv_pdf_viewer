@@ -122,7 +122,7 @@ class _PDFViewerState extends State<PDFViewer> {
     super.didChangeDependencies();
     _pageNumber = _pageController.initialPage + 1;
     _isLoading = true;
-    _pages = List.filled(widget.document.count, null);
+    _pages = List<PDFPage?>.filled(widget.document.count, null);
     // _loadAllPages();
     _loadPage();
   }
@@ -148,7 +148,7 @@ class _PDFViewerState extends State<PDFViewer> {
 
   _preloadPages() async {
     int countvar = 1;
-    for (final Null _ in List.filled(widget.document.count, null)) {
+    for (final Null _ in List<dynamic>.filled(widget.document.count, null)) {
       final PDFPage data = await widget.document.get(
         page: countvar,
         onZoomChanged: onZoomChanged,
@@ -197,12 +197,13 @@ class _PDFViewerState extends State<PDFViewer> {
   }
 
   Widget _drawIndicator() {
-    if (widget.indicatorBuilder != null)
+    if (widget.indicatorBuilder != null) {
       return widget.indicatorBuilder!(
         context,
         _pageNumber,
         widget.document.count,
       );
+    }
 
     Widget child = GestureDetector(
       onTap: widget.showPicker && widget.document.count > 1 ? _pickPage : null,
@@ -237,8 +238,6 @@ class _PDFViewerState extends State<PDFViewer> {
         return Positioned(bottom: 20, left: 20, child: child);
       case IndicatorPosition.bottomRight:
         return Positioned(bottom: 20, right: 20, child: child);
-      default:
-        return Positioned(top: 20, right: 20, child: child);
     }
   }
 

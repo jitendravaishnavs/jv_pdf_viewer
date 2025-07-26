@@ -24,3 +24,7 @@
 ## 1.2.2
 
 - Viewer page loading issue resolved
+
+## 1.2.3
+
+- Linting issues

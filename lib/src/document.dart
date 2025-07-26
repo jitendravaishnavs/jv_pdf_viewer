@@ -162,7 +162,7 @@ class PDFDocument {
     PDFDocument document = PDFDocument();
     document._filePath = file.path;
     try {
-      var pageCount = await _channel.invokeMethod(
+      dynamic pageCount = await _channel.invokeMethod(
         'getNumberOfPages',
         <String, dynamic>{
           'filePath': file.path,
@@ -198,7 +198,7 @@ class PDFDocument {
   }) async {
     assert(page > 0);
     if (_preloaded && _pages.isNotEmpty) return _pages[page - 1];
-    var data = await _channel.invokeMethod('getPage', <String, Object?>{
+    dynamic data = await _channel.invokeMethod('getPage', <String, Object?>{
       'filePath': _filePath,
       'pageNumber': page,
     });
@@ -221,11 +221,11 @@ class PDFDocument {
     final double? panLimit,
   }) async {
     int countvar = 1;
-    for (final Null _ in List.filled(count, null)) {
-      final data = await _channel.invokeMethod('getPage', <String, Object?>{
-        'filePath': _filePath,
-        'pageNumber': countvar,
-      });
+    for (final Null _ in List<dynamic>.filled(count, null)) {
+      final dynamic data = await _channel.invokeMethod(
+        'getPage',
+        <String, Object?>{'filePath': _filePath, 'pageNumber': countvar},
+      );
       _pages.add(
         PDFPage(
           data,
